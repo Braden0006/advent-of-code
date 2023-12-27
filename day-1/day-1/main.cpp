@@ -1,11 +1,11 @@
 #include <iostream> 
 #include <string>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
 int main() {
-	string inputValue;
 	vector<char> numbers;
 
 	char firstElement;
@@ -17,26 +17,40 @@ int main() {
 
 	int total = 0;
 
-	cout << "Enter in your values: ";
+	ifstream inFS;
 
-	cin >> inputValue;
+	inFS.open("day-1-input.txt");
 
-	for (unsigned int i = 0; i < inputValue.size(); ++i) {
-		if (isdigit(inputValue[i])) {
-			numbers.push_back(inputValue[i]);
-		}
+	if (!inFS.is_open()) {
+		cout << "Cannot open file data-1-input.txt" << endl;
 	}
 
-	firstElement = numbers.front();
-	secondElement = numbers.back();
+	string line;
 
-	firstAndSecondElement = firstAndSecondElement + firstElement + secondElement;
+	while (getline(inFS, line)) {
 
-	inputNumber = stoi(firstAndSecondElement);
+		for (unsigned int i = 0; i < line.size(); ++i) {
+			if (isdigit(line[i])) {
+				numbers.push_back(line[i]);
+			}
+		}
 
-	total += inputNumber;
+		firstElement = numbers.front();
+		secondElement = numbers.back();
 
-	cout << inputNumber;
+		firstAndSecondElement = firstAndSecondElement + firstElement + secondElement;
+
+		inputNumber = stoi(firstAndSecondElement);
+
+		total += inputNumber;
+
+		numbers.clear();
+		firstAndSecondElement = "";
+	}
+
+	inFS.close();
+
+	cout << total;
 
 	return 0;
 }

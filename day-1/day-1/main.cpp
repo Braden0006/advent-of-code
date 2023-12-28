@@ -18,6 +18,8 @@ int main() {
 	int inputNumber;
 	int total = 0;
 
+	int temp_num = 0;
+
 	// Initialized input file stream variable
 	ifstream inFS;
 
@@ -40,28 +42,34 @@ int main() {
 			}
 		}
 
-		// Stores the first and last element in the vector
-		firstElement = numbers.front();
-		lastElement = numbers.back();
+		// Checks to see if the numbers vector is not empty
+		if (!numbers.empty()) {
 
-		// Concatenates the first and last element together
-		firstAndLastElement = firstAndLastElement + firstElement + lastElement;
+			// Stores the first and last element in the vector
+			firstElement = numbers.front();
+			lastElement = numbers.back();
 
-		// Converts them to a number
-		inputNumber = stoi(firstAndLastElement);
+			// Concatenates the first and last element together
+			firstAndLastElement = firstAndLastElement + firstElement + lastElement;
 
-		// Adds that number to the "total" variable
-		total += inputNumber;
+			// Converts them to a number
+			inputNumber = stoi(firstAndLastElement);
 
-		// Clears the "numbers" vector and sets "firstAndLastElement" to an empty string
-		numbers.clear();
+			// Adds that number to the "total" variable
+			total += inputNumber;
+
+			// Clears the "numbers" vector
+			numbers.clear();
+		}
+
+		// Sets variable to an empty string so it can store the elements in the next line
 		firstAndLastElement = "";
 	}
 
 	// Closes the file
 	inFS.close();
 
-	cout << total;
+	cout << total << endl;
 
 	return 0;
 }
